@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Xamurai.ListViewPage"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Xamurai"
+             Title="List View"
+             x:Name="listViewPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="defaultCarTemplate">
+                <local:CarView />
+            </DataTemplate>
+            <DataTemplate x:Key="mercedesCarTemplate">
+                <local:MercedesCarView />
+            </DataTemplate>
+            <local:CarDataTemplateSelector x:Key="carTemplateSelector"
+                                       DefaultCarTemplate="{StaticResource defaultCarTemplate}"
+                                       MercedesCarTemplate="{StaticResource mercedesCarTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical"
+                    x:Name="CarScrollView">
+            <StackLayout x:Name="CarLayout"
+				BindableLayout.ItemsSource="{Binding Cars}"
+                BindableLayout.ItemTemplateSelector="{StaticResource carTemplateSelector}">
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
